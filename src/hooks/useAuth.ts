@@ -41,7 +41,8 @@ export function useAuth() {
   }
 
   const signInWithGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' })
+    const redirectTo = import.meta.env.VITE_AUTH_REDIRECT_URL || 'https://clyp-ai.vercel.app';
+    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo } })
     if (error) throw error
   }
 
